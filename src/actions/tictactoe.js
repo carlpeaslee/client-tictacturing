@@ -4,15 +4,15 @@ import {apiUrl, fetchOptions} from '../config'
 
 export const INITIAL_STATE = {
   boardState: {
-    TOP_LEFT: 'EMPTY',
-    TOP_CENTER: 'EMPTY',
-    TOP_RIGHT: 'EMPTY',
-    MID_LEFT: 'EMPTY',
-    MID_CENTER: 'EMPTY',
-    MID_RIGHT: 'EMPTY',
-    BOT_LEFT: 'EMPTY',
-    BOT_CENTER: 'EMPTY',
-    BOT_RIGHT: 'EMPTY'
+    0: 'EMPTY',
+    1: 'EMPTY',
+    2: 'EMPTY',
+    3: 'EMPTY',
+    4: 'EMPTY',
+    5: 'EMPTY',
+    6: 'EMPTY',
+    7: 'EMPTY',
+    8: 'EMPTY'
   },
   playerMark: 'X',
   currentPlayerTurn: 'X',
@@ -41,7 +41,7 @@ export function submitMove(position, mark) {
   const playerId = tictactoeState.playerId
 
   fetchOptions.body = JSON.stringify({
-    query: 'mutation {submitMove(matchId:"'+matchId+'", playerId: "'+playerId+'", position: "'+position+'")}'
+    query: 'mutation {submitMove(matchId:"'+matchId+'", playerId: "'+playerId+'", position: '+position+')}'
   })
 
   let idToken = store.getState().auth.idToken
