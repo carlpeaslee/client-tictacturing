@@ -6,7 +6,7 @@ import BlogContainer from '../../containers/Blog/BlogContainer'
 function Home () {
   return (
     <div>
-      <h2>Home</h2>
+      <h2>Blog</h2>
       <BlogContainer/>
     </div>
   )
