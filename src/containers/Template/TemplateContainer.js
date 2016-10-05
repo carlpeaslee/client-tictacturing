@@ -1,13 +1,15 @@
+//React and Redux
 import React, {Component} from 'react'
-import {Grid, Row} from 'react-bootstrap'
-import Navigation from '../../components/Template/Navigation'
-
-
-import Radium from 'radium'
-import styles from '../../styles'
-
 import {connect} from 'react-redux'
 
+//Styling
+import Radium from 'radium'
+// import styles from '../../styles'
+
+//Components
+import Navigation from '../../components/Template/Navigation'
+
+//Actions
 import {checkLocalStore, showLock, listenForAuthentication, logout} from '../../actions/auth'
 
 class Template extends Component {
@@ -21,18 +23,33 @@ class Template extends Component {
   }
   render() {
     return(
-      <Grid>
-        <Navigation
-          profile={this.props.profile}
-          dLogout={this.props.dLogout}
-          dShowLock={this.props.dShowLock}
-        />
-        <Row
-          style={styles.view}
-        >
+      <div>
+        <nav>
+          <Navigation
+            profile={this.props.profile}
+            dLogout={this.props.dLogout}
+            dShowLock={this.props.dShowLock}
+          />
+        </nav>
+        <main>
           {this.props.children}
-        </Row>
-      </Grid>
+        </main>
+        <footer>
+          This is the footer
+        </footer>
+      </div>
+      // <Grid>
+      //   <Navigation
+      //     profile={this.props.profile}
+      //     dLogout={this.props.dLogout}
+      //     dShowLock={this.props.dShowLock}
+      //   />
+      //   <Row
+      //     style={styles.view}
+      //   >
+      //     {this.props.children}
+      //   </Row>
+      // </Grid>
     )
   }
 }

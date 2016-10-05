@@ -1,13 +1,13 @@
 import React from 'react'
 import {Route, IndexRoute} from 'react-router'
 import TemplateContainer from './containers/Template/TemplateContainer'
+import store from './store'
+
 import Home from './views/Home/Home'
 import About from './views/About/About'
-import Programming from './views/Programming/Programming'
-import Writing from './views/Writing/Writing'
-
 import Admin from './views/Admin/Admin'
-import store from './store'
+import Blog from './views/Blog/Blog'
+
 
 
 const adminOnly = (nextState, replace) => {
@@ -34,12 +34,8 @@ export const makeRoutes = () => {
         component={About}
       />
       <Route
-        path="/programming"
-        component={Programming}
-      />
-      <Route
-        path="/writing"
-        component={Writing}
+        path="/blog"
+        component={Blog}
       />
     </Route>
   )

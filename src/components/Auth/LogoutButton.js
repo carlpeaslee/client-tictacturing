@@ -1,13 +1,13 @@
 import React from 'react'
-import {Button} from 'react-bootstrap'
+import FlatButton from 'material-ui/FlatButton';
 
 function LogoutButton(props) {
   return (
-    <Button
+    <FlatButton
       onClick={props.dLogout}
     >
       Logout
-    </Button>
+    </FlatButton>
   )
 }
 

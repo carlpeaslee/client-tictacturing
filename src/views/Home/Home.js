@@ -1,13 +1,12 @@
 import React from 'react'
 
-import BlogContainer from '../../containers/Blog/BlogContainer'
+import TicTacToeContainer from '../../containers/TicTacToe/TicTacToeContainer'
 
 
 function Home () {
   return (
     <div>
-      <h2>Blog</h2>
-      <BlogContainer/>
+      <TicTacToeContainer/>
     </div>
   )
 }

@@ -1,14 +1,14 @@
 import React from 'react'
-import {Button} from 'react-bootstrap'
+import FlatButton from 'material-ui/FlatButton'
 
 
 function LoginButton(props) {
   return (
-    <Button
+    <FlatButton
       onClick={props.dShowLock}
     >
       Login
-    </Button>
+    </FlatButton>
   )
 }
 
