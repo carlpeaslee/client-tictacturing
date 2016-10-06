@@ -18,8 +18,6 @@ function TTTGrid(props) {
           gameState={props.gameState}
           squareState={props.boardState[square]}
           submitMove={props.submitMove}
-          playerMark={props.playerMark}
-          currentPlayerTurn={props.currentPlayerTurn}
         />
       )
     }

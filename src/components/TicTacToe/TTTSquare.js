@@ -4,10 +4,9 @@ import styles from '../../styles'
 
 function TTTSquare (props) {
   const handleSquareClick = () => {
-    if (props.currentPlayerTurn === props.playerMark) {
+    if (props.gameState === 'YOUR_TURN') {
       let position = props.position
-      let mark = props.playerMark
-      props.submitMove(position, mark)
+      props.submitMove(position)
     }
   }
   return (
