@@ -34,22 +34,7 @@ class Template extends Component {
         <main>
           {this.props.children}
         </main>
-        <footer>
-          This is the footer
-        </footer>
       </div>
-      // <Grid>
-      //   <Navigation
-      //     profile={this.props.profile}
-      //     dLogout={this.props.dLogout}
-      //     dShowLock={this.props.dShowLock}
-      //   />
-      //   <Row
-      //     style={styles.view}
-      //   >
-      //     {this.props.children}
-      //   </Row>
-      // </Grid>
     )
   }
 }

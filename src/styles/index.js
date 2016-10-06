@@ -19,6 +19,9 @@ const styles = {
     display: 'inline-block',
     width: '25vh',
     height: '25vh',
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    lineHeight: '25vh',
   },
   centeredContainer: {
     margin: '0 auto',
