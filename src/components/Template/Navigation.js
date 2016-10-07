@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-// import styles from '../../styles'
+import styles from '../../styles'
 import Radium from 'radium'
 import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
@@ -21,19 +21,16 @@ class Navigation extends Component {
 
 
   render(){
-    // const showAdmin = () => {
-    //   if(this.props.profile) {
-    //     return (
-    //       <Link to={'/admin'}>Admin</Link>
-    //     )
-    //   }
-    // }
     return (
       <div>
         <AppBar
           onLeftIconButtonTouchTap={this.handleToggle}
           title={(
-            <Link to={'/'}>TicTacTuring</Link>
+            <Link
+              to={'/'}
+              style={styles.navLink}
+              >TicTacTuring
+            </Link>
           )}
           iconElementRight={(
             <AuthButtons
@@ -54,32 +51,31 @@ class Navigation extends Component {
               title={"My Account"}
             />
             <CardText>
-              Hello text here
+              Welcome to TicTacTuring
             </CardText>
 
           </Card>
 
-          <Link to={'/about'}>
-            <MenuItem
-              onTouchTap={this.handleClose}
-            >
-              About
-            </MenuItem>
-          </Link>
-
-          <Link to={'/blog'}>
-            <MenuItem
-              onTouchTap={this.handleClose}
-            >
-              Blog
-            </MenuItem>
-          </Link>
-
-          <MenuItem
-            onTouchTap={this.handleClose}
+          <Link
+            to={'/about'}
+            style={styles.drawerLink}
           >
-            Github
-          </MenuItem>
+            <MenuItem
+              onTouchTap={this.handleClose}
+              primaryText={'About'}
+            />
+          </Link>
+
+          <Link
+            to={'/blog'}
+            style={styles.drawerLink}
+          >
+            <MenuItem
+              onTouchTap={this.handleClose}
+              primaryText={'Blog'}
+            />
+          </Link>
+
         </Drawer>
       </div>
     )

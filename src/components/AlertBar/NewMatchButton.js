@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 function NewMatchButton(props) {
   return (
     <RaisedButton
-      onClick={props.requestNewMatch}
+      onTouchTap={props.requestNewMatch}
       primary={true}
       label={'Request New Match'}
     />

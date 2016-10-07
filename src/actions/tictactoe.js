@@ -60,27 +60,6 @@ export function submitMove(position) {
       playerId
     })
   }
-
-
-
-  // fetchOptions.body = JSON.stringify({
-  //   query: 'mutation {submitMove(matchId:"'+matchId+'", playerId: "'+playerId+'", position: '+position+')}'
-  // })
-  //
-  // let idToken = store.getState().auth.idToken
-  //
-  // if(idToken) {
-  //   fetchOptions.headers.Authorization = 'Bearer ' + idToken
-  // }
-  // return function (dispatch) {
-  //   return fetch(apiUrl, fetchOptions).then((res) => {
-  //     return res.json()
-  //   }).then((response) => {
-  //     if(response) {
-  //       console.log(response)
-  //     }
-  //   })
-  // }
 }
 
 export const REQUEST_NEW_MATCH = 'REQUEST_NEW_MATCH'
@@ -117,11 +96,38 @@ export function requestNewMatch() {
     })
 
     socket.on('winner', (data) => {
-      let winner = data.winner
-      let locationOfWin = data.locationOfWin
-      dispatch(recordWinner(winner, locationOfWin))
+      const winner = data.winner
+      const locationOfWin = data.locationOfWin
+      if(locationOfWin === 'TIE') {
+        dispatch(recordTie())
+      } else {
+        dispatch(recordWinner(winner, locationOfWin))
+      }
     })
 
+    socket.on('opponentDisconnected', () =>{
+
+      dispatch(opponentDisconnected())
+    })
+
+  }
+}
+
+export const RECORD_TIE = 'RECORD_TIE'
+export function recordTie() {
+  return {
+    type: RECORD_TIE,
+    gameState: 'TIE'
+  }
+}
+
+
+export const OPPONENT_DISCONNECTED = 'OPPONENT_DISCONNECTED'
+export function opponentDisconnected() {
+  return {
+    type: OPPONENT_DISCONNECTED,
+    ...INITIAL_STATE,
+    gameState: 'OPPONENT_DISCONNECTED'
   }
 }
 

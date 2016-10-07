@@ -5,9 +5,8 @@ function LogoutButton(props) {
   return (
     <FlatButton
       onClick={props.dLogout}
-    >
-      Logout
-    </FlatButton>
+      label={'Logout'}
+    />
   )
 }
 

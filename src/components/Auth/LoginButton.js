@@ -6,9 +6,8 @@ function LoginButton(props) {
   return (
     <FlatButton
       onClick={props.dShowLock}
-    >
-      Login
-    </FlatButton>
+      label={'Login'}
+    />
   )
 }
 

@@ -5,6 +5,16 @@ import NewMatchButton from './NewMatchButton'
 function AlertBar(props) {
   const messageCreator = () => {
     switch (props.gameState) {
+      case 'OPPONENT_DISCONNECTED': {
+        return (
+          <div>
+            <span>oh no! your opponent left!</span>
+            <NewMatchButton
+              requestNewMatch={props.requestNewMatch}
+            />
+          </div>
+        )
+      }
       case 'LOOKING_FOR_MATCH': {
         return (
           <div>
@@ -43,14 +53,30 @@ function AlertBar(props) {
       case 'YOU_WON': {
         return (
           <div>
-            <p>congrats you won!</p>
+            <span>yay you won. play again?</span>
+            <NewMatchButton
+              requestNewMatch={props.requestNewMatch}
+            />
           </div>
         )
       }
       case 'YOU_LOST': {
         return (
           <div>
-            <p>oh no you lost</p>
+            <span>darn you lost. play again?</span>
+            <NewMatchButton
+              requestNewMatch={props.requestNewMatch}
+            />
+          </div>
+        )
+      }
+      case 'TIE': {
+        return (
+          <div>
+            <span>cat's game! play again?</span>
+            <NewMatchButton
+              requestNewMatch={props.requestNewMatch}
+            />
           </div>
         )
       }

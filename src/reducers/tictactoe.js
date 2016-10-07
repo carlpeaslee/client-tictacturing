@@ -1,11 +1,27 @@
-import {INITIAL_STATE, RECORD_MOVE, LOOK_FOR_MATCH, WAITING_ROOM_FOUND, MATCH_FOUND, OPPONENT_FOUND, RECORD_WINNER} from '../actions/tictactoe'
+import {INITIAL_STATE, RECORD_MOVE, LOOK_FOR_MATCH, WAITING_ROOM_FOUND, MATCH_FOUND, OPPONENT_FOUND, RECORD_WINNER, RECORD_TIE, OPPONENT_DISCONNECTED} from '../actions/tictactoe'
 
 function tictactoe(state = {...INITIAL_STATE}, action) {
   switch (action.type) {
+    case OPPONENT_DISCONNECTED: {
+      return {
+        ...state,
+        boardState: action.boardState,
+        playerMark: action.playerMark,
+        playerId: action.playerId,
+        matchId: action.matchId,
+        gameState: action.gameState
+      }
+    }
     case RECORD_WINNER: {
       return {
         ...state,
         locationOfWin: action.locationOfWin,
+        gameState: action.gameState
+      }
+    }
+    case RECORD_TIE: {
+      return {
+        ...state,
         gameState: action.gameState
       }
     }
