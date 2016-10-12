@@ -1,104 +1,157 @@
-import React from 'react'
+import React, {Component} from 'react'
 import styles from '../../styles'
 import NewMatchButton from './NewMatchButton'
+import TuringTestDialog from './TuringTestDialog'
 
-function AlertBar(props) {
-  const messageCreator = () => {
-    switch (props.gameState) {
+import {Snackbar, Stepper, Step, StepLabel, CircularProgress} from 'material-ui'
+
+class AlertBar extends Component {
+  constructor(props) {
+    super(props)
+    this.messageCreator = this.messageCreator.bind(this)
+    this.stepIndex = this.stepIndex.bind(this)
+    this.joinProgress = this.joinProgress.bind(this)
+  }
+
+  stepIndex = () => {
+    switch (this.props.gameState) {
+      default:
+      case 'AWAITING_READY_ACTION':
+      case 'OPPONENT_DISCONNECTED':
+      case 'LOOKING_FOR_MATCH':
+      case 'LOOKING_FOR_OPPONENT': {
+        return 0
+      }
+      case 'MATCH_FOUND':
+      case 'WAITING_FOR_OPPONENT_MOVE':
+      case 'YOUR_TURN': {
+        return 1
+      }
+      case 'YOU_WON':
+      case 'YOU_LOST':
+      case 'TIE': {
+        return 2
+      }
+    }
+  }
+  joinProgress = () => {
+    switch (this.props.gameState) {
+
+      case 'AWAITING_READY_ACTION':
+      case 'OPPONENT_DISCONNECTED':{
+        return (
+          <NewMatchButton
+            requestNewMatch={this.props.requestNewMatch}
+          />
+        )
+      }
+      case 'LOOKING_FOR_MATCH':
+      case 'LOOKING_FOR_OPPONENT':
+      case 'WAITING_FOR_OPPONENT_MOVE':
+      case 'MATCH_FOUND': {
+        return (
+          <CircularProgress
+          />
+        )
+      }
+      default:
+      case 'YOUR_TURN':
+      case 'YOU_WON':
+      case 'YOU_LOST':
+      case 'TIE':{
+        return null
+      }
+    }
+  }
+
+  messageCreator = () => {
+    switch (this.props.gameState) {
       case 'OPPONENT_DISCONNECTED': {
         return (
-          <div>
             <span>oh no! your opponent left!</span>
-            <NewMatchButton
-              requestNewMatch={props.requestNewMatch}
-            />
-          </div>
         )
       }
       case 'LOOKING_FOR_MATCH': {
         return (
-          <div>
-            <p>let's go look for a match</p>
-          </div>
+            <span>let's go look for a match</span>
         )
       }
       case 'LOOKING_FOR_OPPONENT': {
         return (
-          <div>
-            <p>ok, we've joined a waiting room, now we just need an opponent</p>
-          </div>
+            <span>ok, we've joined a waiting room, now we just need an opponent</span>
         )
       }
       case 'MATCH_FOUND': {
         return (
-          <div>
-            <p>great! we found a match to join!</p>
-          </div>
+            <span>great! we found a match to join!</span>
         )
       }
       case 'WAITING_FOR_OPPONENT_MOVE': {
         return (
-          <div>
-            <p>waiting on your opponent...</p>
-          </div>
+            <span>waiting on your opponent...</span>
         )
       }
       case 'YOUR_TURN': {
         return (
-          <div>
-            <p>it's your turn!</p>
-          </div>
+            <span>it's your turn!</span>
         )
       }
       case 'YOU_WON': {
         return (
-          <div>
             <span>yay you won. play again?</span>
-            <NewMatchButton
-              requestNewMatch={props.requestNewMatch}
-            />
-          </div>
         )
       }
       case 'YOU_LOST': {
         return (
-          <div>
             <span>darn you lost. play again?</span>
-            <NewMatchButton
-              requestNewMatch={props.requestNewMatch}
-            />
-          </div>
         )
       }
       case 'TIE': {
         return (
-          <div>
             <span>cat's game! play again?</span>
-            <NewMatchButton
-              requestNewMatch={props.requestNewMatch}
-            />
-          </div>
         )
       }
       default:
       case 'AWAITING_READY_ACTION': {
         return (
-          <div>
-            <NewMatchButton
-              requestNewMatch={props.requestNewMatch}
-            />
-          </div>
+          <span>ready to play?</span>
         )
       }
     }
   }
-  return (
-    <div
-      style={styles.alertBar}
-    >
-      {messageCreator()}
-    </div>
-  )
+
+  render() {
+    return (
+      <div
+        style={styles.alertBar}
+      >
+        <Stepper
+          activeStep={this.stepIndex()}
+        >
+          <Step>
+            <StepLabel>join a game</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>play</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>human or robot?</StepLabel>
+          </Step>
+        </Stepper>
+        <div>
+          {this.joinProgress()}
+        </div>
+        <Snackbar
+          open={true}
+          message={this.messageCreator()}
+        />
+        <TuringTestDialog
+          gameState={this.props.gameState}
+          submitTuringTest={this.props.submitTuringTest}
+        />
+      </div>
+    )
+  }
 }
 
 export default AlertBar

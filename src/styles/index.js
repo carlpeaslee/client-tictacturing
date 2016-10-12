@@ -43,7 +43,7 @@ const styles = {
     margin: '0 auto',
     paddingTop: '1vh',
     width: '75vh',
-    height: '5vh',
+    height: '14vh',
     textAlign: 'center',
     verticalAlign: 'middle',
     overflow: 'hidden'

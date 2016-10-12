@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {submitMove, checkGameState, requestNewMatch} from '../../actions/tictactoe'
+import {submitMove, checkGameState, requestNewMatch, submitTuringTest} from '../../actions/tictactoe'
 
 import Radium from 'radium'
 import styles from '../../styles'
@@ -24,6 +24,7 @@ class TicTacToeContainer extends Component {
         <AlertBar
           gameState={this.props.gameState}
           requestNewMatch={this.props.requestNewMatch}
+          submitTuringTest={this.props.submitTuringTest}
         />
         <TTTGrid
           boardState={this.props.boardState}
@@ -58,6 +59,9 @@ const mapDispatchToProps = (dispatch) => {
     requestNewMatch: () => {
       dispatch(requestNewMatch())
     },
+    submitTuringTest: (guessRobot) => {
+      dispatch(submitTuringTest(guessRobot))
+    }
   }
 }
 

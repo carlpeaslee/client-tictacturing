@@ -48,9 +48,6 @@ export const SUBMIT_MOVE = "SUBMIT_MOVE"
 export function submitMove(position) {
   return function (dispatch) {
     const tictactoeState = store.getState().tictactoe
-
-    console.log(tictactoeState)
-
     const matchId = tictactoeState.matchId
     const playerId = tictactoeState.playerId
 
@@ -59,6 +56,34 @@ export function submitMove(position) {
       position,
       playerId
     })
+  }
+}
+
+export const SUBMIT_TURING_TEST = "SUBMIT_TURING_TEST"
+
+export function submitTuringTest(robotGuess) {
+  return function (dispatch) {
+    const tictactoeState = store.getState().tictactoe
+    const matchId = tictactoeState.matchId
+    const playerId = tictactoeState.playerId
+
+    socket.emit('turingGuess', {
+      matchId,
+      playerId,
+      robotGuess
+    })
+    dispatch(startOver())
+  }
+}
+
+export const START_OVER = "START_OVER"
+
+export function startOver() {
+
+  return {
+    type: START_OVER,
+    ...INITIAL_STATE,
+    gameState: 'AWAITING_READY_ACTION'
   }
 }
 
@@ -147,7 +172,10 @@ export function lookForMatch() {
   return {
     type: LOOK_FOR_MATCH,
     gameState: 'LOOKING_FOR_MATCH',
-    locationOfWin: null
+    locationOfWin: null,
+    boardState: {
+      ...INITIAL_STATE.boardState
+    }
   }
 }
 

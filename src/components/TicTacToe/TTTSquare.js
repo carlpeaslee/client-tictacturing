@@ -9,7 +9,7 @@ class TTTSquare extends Component {
   }
 
   handleSquareClick () {
-    if (this.props.gameState === 'YOUR_TURN') {
+    if (this.props.gameState === 'YOUR_TURN' && this.props.squareState === 'EMPTY') {
       let position = this.props.position
       this.props.submitMove(position)
     }
