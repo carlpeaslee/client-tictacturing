@@ -66,7 +66,7 @@ class Navigation extends Component {
             />
           </Link>
 
-          <Link
+          {/* <Link
             to={'/blog'}
             style={styles.drawerLink}
           >
@@ -74,7 +74,7 @@ class Navigation extends Component {
               onTouchTap={this.handleClose}
               primaryText={'Blog'}
             />
-          </Link>
+          </Link> */}
 
         </Drawer>
       </div>

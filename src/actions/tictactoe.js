@@ -70,7 +70,7 @@ export function submitTuringTest(robotGuess) {
     socket.emit('turingGuess', {
       matchId,
       playerId,
-      robotGuess
+      guessedRobot: robotGuess
     })
     dispatch(startOver())
   }
