@@ -2,6 +2,61 @@ import Board from './Board.svg'
 import x from './x.svg'
 import o from './o.svg'
 
+let width = window.innerWidth
+let height = window.innerHeight
+
+function resize() {
+  width = window.innerWidth
+  height = window.innerHeight
+  console.log('resize')
+}
+
+window.onResize = resize
+
+const s = new class {
+
+  get orientation() {
+    if (width > height) {
+      return 'LANDSCAPE'
+    } else {
+      return 'PORTRAIT'
+    }
+  }
+
+  deviceSize () {
+    if (width < 500) {
+      return 'MOBILE'
+    } else {
+      return 'DESKTOP'
+    }
+  }
+
+  get all () {
+    let styles = {}
+    if(this.deviceSize() === 'MOBILE') {
+      styles = {
+        ...styles,
+        boardWidth: '93vw',
+        boardHeight: '93vw',
+        squareWidth: '31vw',
+        squareHeight: '31vw',
+        alertBarWidth: '93vw'
+      }
+    } else {
+      styles = {
+        ...styles,
+        boardWidth: '75vh',
+        boardHeight: '75vh',
+        squareWidth: '25vh',
+        squareHeight: '25vh',
+        alertBarWidth: '75vh'
+      }
+    }
+    return styles
+  }
+}
+
+
 const styles = {
   blogPost: {
     marginTop: "10px",
@@ -13,17 +68,16 @@ const styles = {
   board: {
     display: 'block',
     margin: '0 auto',
-    width: '75vh',
-    height: '75vh',
+    width: s.all.boardWidth,
+    height: s.all.boardHeight,
     background: 'url('+Board+')'
   },
   square: {
     display: 'inline-block',
-    width: '25vh',
-    height: '25vh',
+    width: s.all.squareWidth,
+    height: s.all.squareHeight,
     textAlign: 'center',
     verticalAlign: 'middle',
-    lineHeight: '25vh',
     overflow: 'hidden',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -42,7 +96,7 @@ const styles = {
     display: 'block',
     margin: '0 auto',
     paddingTop: '1vh',
-    width: '75vh',
+    width: s.all.alertBarWidth,
     height: '14vh',
     textAlign: 'center',
     verticalAlign: 'middle',

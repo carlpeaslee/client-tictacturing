@@ -13,6 +13,7 @@ import Navigation from '../../components/Template/Navigation'
 import {checkLocalStore, showLock, listenForAuthentication, logout} from '../../actions/auth'
 
 class Template extends Component {
+
   componentWillMount() {
     if (!this.props.idToken && !this.props.isListeningForAuthentication){
       this.props.dCheckLocalStorage()
