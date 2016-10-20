@@ -46,10 +46,9 @@ const styles = {
     height: '14vh',
     textAlign: 'center',
     verticalAlign: 'middle',
-    overflow: 'hidden'
   },
   navLink: {
-    color: 'white',
+    color: 'black',
     textDecoration: 'none'
   },
   drawerLink: {
