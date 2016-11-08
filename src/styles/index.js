@@ -2,29 +2,27 @@ import Board from './Board.svg'
 import x from './x.svg'
 import o from './o.svg'
 
-let width = window.innerWidth
-let height = window.innerHeight
-
-function resize() {
-  width = window.innerWidth
-  height = window.innerHeight
-  console.log('resize')
-}
-
-window.onResize = resize
 
 const s = new class {
 
+  get width() {
+    return window.innerWidth
+  }
+
+  get height() {
+    return window.innerHeight
+  }
+
   get orientation() {
-    if (width > height) {
+    if (this.width > this.height) {
       return 'LANDSCAPE'
     } else {
       return 'PORTRAIT'
     }
   }
 
-  deviceSize () {
-    if (width < 500) {
+  get deviceSize () {
+    if ((this.width < 500) || this.height < 500 ) {
       return 'MOBILE'
     } else {
       return 'DESKTOP'
@@ -33,7 +31,7 @@ const s = new class {
 
   get all () {
     let styles = {}
-    if(this.deviceSize() === 'MOBILE') {
+    if(this.deviceSize === 'MOBILE') {
       styles = {
         ...styles,
         boardWidth: '93vw',

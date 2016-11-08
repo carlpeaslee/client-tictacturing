@@ -7,10 +7,11 @@ import Radium from 'radium'
 // import styles from '../../styles'
 
 //Components
-import Navigation from '../../components/Template/Navigation'
+import WebNav from '../../components/Template/WebNav'
 
 //Actions
 import {checkLocalStore, showLock, listenForAuthentication, logout} from '../../actions/auth'
+import {hoverElement, unhoverElement} from '../../actions/ui'
 
 class Template extends Component {
 
@@ -25,13 +26,17 @@ class Template extends Component {
   render() {
     return(
       <div>
-        <nav>
-          <Navigation
+          {/* <Navigation
             profile={this.props.profile}
             dLogout={this.props.dLogout}
             dShowLock={this.props.dShowLock}
-          />
-        </nav>
+          /> */}
+        <WebNav
+          setHoverElement={this.props.setHoverElement}
+          unhoverElement={this.props.unhoverElement}
+          hoverElements={this.props.hoverElements}
+        />
+
         <main>
           {this.props.children}
         </main>
@@ -44,7 +49,8 @@ const mapStateToProps = (state) => {
   return {
     profile: state.auth.profile,
     idToken: state.auth.idToken,
-    isListeningForAuthentication: state.auth.isListeningForAuthentication
+    isListeningForAuthentication: state.auth.isListeningForAuthentication,
+    hoverElements: state.ui.hoverElements,
   }
 }
 
@@ -62,6 +68,12 @@ const mapDispatchToProps = (dispatch) => {
     dLogout: () => {
       dispatch(logout())
     },
+    setHoverElement: (element) => {
+      dispatch(hoverElement(element))
+    },
+    unhoverElement: (element) => {
+      dispatch(unhoverElement(element))
+    }
   }
 }
 
